@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router";
+import Output from "./pages/Output";
+import Input from "./pages/Input";
+import Home from "./pages/Home";
+import { useState } from "react";
 
 function App() {
+  const [imgUrl, setImgUrl] = useState(
+    window.localStorage.getItem("imageUrl") ??
+      "/apps/dota2/images/dota_react/heroes/antimage.png?"
+  );
+  // console.log(window.localStorage.getItem('imageUrl'));
+  console.log(imgUrl);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Home></Home>}></Route>
+        <Route path="/home" element={<Home></Home>}></Route>
+        <Route
+          path="/input"
+          element={<Input imgUrl={imgUrl} setImgUrl={setImgUrl}></Input>}
+        ></Route>
+        <Route
+          path="/output"
+          element={<Output imgUrl={imgUrl}></Output>}
+        ></Route>
+      </Routes>
+    </>
   );
 }
 
